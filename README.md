@@ -4,9 +4,9 @@ A simple web page showing GitHub current system status and latest activity messa
 ##Installation
 Execute `npm install`
 
-##Running
-1. Run `npm start`
-2. Open `http://localhost:3000` in your browser.
+##Start Application
+Execute `npm start`  
+Open `http://localhost:4567` in your browser
 
 ##Testing
 No tests were written yet.
