@@ -1,31 +1,28 @@
 var express = require('express')
 var ghstatus = require ('./api')
-var exphbs  = require('express-handlebars');
-var moment = require('moment');
 var Q = require('q');
 
 var app = express();
-var hbs = exphbs.create({
-	helpers: {
-		datify: function (dateStr) {
-			return moment(new Date(dateStr)).format("DD/MM/YY HH:mm");
-		}
-	}
-});
 
 // Register `hbs.engine` with the Express app.
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars');
-
+app.use(express.static('public'));
 app.get('/',function (req,res) {
-	Q.all([ghstatus.status(),ghstatus.messages()]).done(
-	 function(results) {
-	 	res.render('home',{
-	 		status:results[0],
-	 		messages:results[1]
-	 	});
-	 });
+ 	res.render('/index.html');
+});
 	
+
+app.get('/api/status', function (req,res) {
+	ghstatus.status().then(function(status){
+		res.json(status);
+	});
+});
+
+
+
+app.get('/api/messages', function (req,res) {
+	ghstatus.messages().then(function(messages) {
+		res.json(messages);
+	});
 });
 
 //start server on port 3000
@@ -34,4 +31,4 @@ var server = app.listen(3000, function () {
   var port = server.address().port;
 
   console.log('GitHub Status app listening at http://%s:%s', host, port);
-  });
+ });
