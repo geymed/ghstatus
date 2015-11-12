@@ -10,7 +10,7 @@ Open `http://localhost:4567` in your browser
 
 ##Testing
 No tests were written yet.
-However, live github status can be replaced with a mock by changing **"test"** value tp **"true"** in `api/config.json`
+However, live github status can be replaced with a mock by changing **"test"** value to **"true"** in `api/config.json`
 
 
 
